@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAISON - Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Prompt:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: { 50: '#FDFBF7', 100: '#F7F3EB', 200: '#EAE3D2' },
+                        charcoal: { 800: '#2C2A29', 900: '#1C1B1A' },
+                        warmgray: '#787571', softgold: '#C5A880', goldhover: '#B3946B'
+                    },
+                    fontFamily: { sans: ['Prompt', 'sans-serif'], serif: ['Playfair Display', 'serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #FDFBF7; color: #2C2A29; }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 1.5px; bottom: -4px; left: 50%; background-color: #C5A880; transition: all 0.3s ease; transform: translateX(-50%); }
+        .nav-link.active-link::after { width: 100%; }
+        .tab-btn-active { border-color: #C5A880 !important; color: #1C1B1A !important; font-weight: 500; }
+    </style>
+</head>
+<body class="bg-cream-50 text-charcoal-800 min-h-screen flex flex-col justify-between">
+    <header class="sticky top-0 z-50 bg-cream-50/90 backdrop-blur-md border-b border-cream-200/60 transition-all">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20 sm:h-24">
+                <a href="index.html" class="text-left group focus:outline-none">
+                    <span class="font-serif text-2xl sm:text-3xl font-normal tracking-[0.2em] text-charcoal-900 block">M A I S O N</span>
+                    <span class="text-[9px] text-warmgray tracking-[0.3em] uppercase block font-light -mt-1 group-hover:text-softgold transition">Eatery & Crafted Taste</span>
+                </a>
+                <nav class="hidden md:flex space-x-8 text-xs sm:text-sm tracking-widest font-light uppercase">
+                    <a href="index.html" class="nav-link text-warmgray hover:text-charcoal-900 transition py-1">หน้าแรก</a>
+                    <a href="menu.html" class="nav-link active-link text-charcoal-900 hover:text-charcoal-900 transition py-1">เมนูอาหาร</a>
+                    <a href="about.html" class="nav-link text-warmgray hover:text-charcoal-900 transition py-1">เกี่ยวกับเรา</a>
+                    <a href="reservation.html" class="nav-link text-warmgray hover:text-charcoal-900 transition py-1">จองโต๊ะ</a>
+                    <a href="contact.html" class="nav-link text-warmgray hover:text-charcoal-900 transition py-1">ติดต่อเรา</a>
+                </nav>
+                <div class="hidden md:block">
+                    <a href="reservation.html" class="border border-charcoal-800 text-charcoal-900 text-xs font-light tracking-widest uppercase px-6 py-2.5 rounded-full hover:bg-charcoal-900 hover:text-white transition duration-300">สำรองที่นั่ง</a>
+                </div>
+                <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-charcoal-900 p-2"><i class="fa-solid fa-bars-staggered text-xl"></i></button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-cream-100 border-b border-cream-200 px-6 py-6 space-y-4 text-center text-xs tracking-widest uppercase font-light">
+            <a href="index.html" class="block py-2">หน้าแรก</a>
+            <a href="menu.html" class="block py-2">เมนูอาหาร</a>
+            <a href="about.html" class="block py-2">เกี่ยวกับเรา</a>
+            <a href="reservation.html" class="block py-2">จองโต๊ะ</a>
+            <a href="contact.html" class="block py-2">ติดต่อเรา</a>
+        </div>
+    </header>
+    <main class="flex-grow max-w-5xl mx-auto px-6 py-12 md:py-16 w-full">
+        <div class="text-center space-y-3 mb-12">
+            <span class="text-xs font-light tracking-[0.3em] uppercase text-warmgray">Crafted Flavors</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-normal text-charcoal-900">รายการเมนูอาหาร</h2>
+            <div class="w-12 h-px bg-softgold mx-auto mt-4"></div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3 sm:gap-6 mb-16 text-xs sm:text-sm tracking-widest uppercase font-light border-b border-cream-200 pb-4">
+            <button onclick="filterMenu('all', this)" class="menu-tab-btn tab-btn-active px-4 py-2 border-b-2 border-transparent">ทั้งหมด</button>
+            <button onclick="filterMenu('main', this)" class="menu-tab-btn text-warmgray border-b-2 border-transparent px-4 py-2">อาหารจานหลัก</button>
+            <button onclick="filterMenu('appetizer', this)" class="menu-tab-btn text-warmgray border-b-2 border-transparent px-4 py-2">อาหารทานเล่น</button>
+            <button onclick="filterMenu('dessert', this)" class="menu-tab-btn text-warmgray border-b-2 border-transparent px-4 py-2">ของหวาน</button>
+            <button onclick="filterMenu('drink', this)" class="menu-tab-btn text-warmgray border-b-2 border-transparent px-4 py-2">เครื่องดื่ม</button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="menu-list"></div>
+    </main>
+    <script>
+        const menuItems = [
+            { id: 1, name: 'สเต๊กเนื้อออสเตรเลียย่างสมุนไพร', category: 'main', price: '790', desc: 'เนื้อสันนอกคัดพิเศษ เสิร์ฟพร้อมซอสไวน์แดงและมันบดเนื้อเนียน', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80' },
+            { id: 2, name: 'พาสต้าเส้นสดซอสเพสโต้กุ้งสด', category: 'main', price: '450', desc: 'พาสต้าทำเองสดใหม่ ผัดซอสโหระพาออร์แกนิกและกุ้งแม่น้ำ', img: 'https://images.unsplash.com/photo-1621996346565-e3d5d6281288?auto=format&fit=crop&w=400&q=80' },
+            { id: 3, name: 'สเต๊กแซลมอนย่างซอสเลมอนเนย', category: 'main', price: '520', desc: 'แซลมอนนอร์เวย์สด ย่างหนังกรอบ เสิร์ฟคู่กับผักย่างประจำฤดูกาล', img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=400&q=80' },
+            { id: 4, name: 'สลัดอกเป็ดรมควัน & ส้มเช้ง', category: 'appetizer', price: '380', desc: 'ผักสลัดออร์แกนิกสดกรอบ คลุกเคล้าน้ำดรสซิ่งวอลนัทรสสดชื่น', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=400&q=80' },
+            { id: 5, name: 'ซุปครีมเห็ดทรัฟเฟิล', category: 'appetizer', price: '320', desc: 'ซุปครีมเห็ดเข้มข้นหอมกลิ่นน้ำมันทรัฟเฟิลแท้ เสิร์ฟพร้อมขนมปังอบ', img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=400&q=80' },
+            { id: 6, name: 'พานาคอตต้าวานิลลาแท้', category: 'dessert', price: '220', desc: 'พานาคอตต้านุ่มละมุน เสิร์ฟคู่กับซอสมัลเบอร์รี่รสเปรี้ยวหวาน', img: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80' },
+            { id: 7, name: 'เค้กช็อกโกแลตฟัดจ์แมคคาเดเมีย', category: 'dessert', price: '240', desc: 'เค้กช็อกโกแลตเข้มข้น 70% ท็อปด้วยแมคคาเดเมียอบกรอบ', img: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80' },
+            { id: 8, name: 'ชาอู่หลงกลิ่นดอกมะลิ', category: 'drink', price: '140', desc: 'ชาอู่หลงพรีเมียมหอมกลิ่นดอกมะลิธรรมชาติ อุ่นสบาย', img: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=400&q=80' },
+            { id: 9, name: 'คราฟต์กาแฟสกัดเย็น (Cold Brew)', category: 'drink', price: '160', desc: 'เมล็ดกาแฟไทยอาราบิก้า 100% สกัดนาน 16 ชั่วโมง ให้รสสัมผัสที่นุ่มนวล', img: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=400&q=80' }
+        ];
+        function renderMenu(items) {
+            document.getElementById('menu-list').innerHTML = items.map(item => `
+                <div class="flex flex-col sm:flex-row gap-4 p-4 bg-cream-100/40 rounded-2xl border border-cream-200/70">
+                    <img src="${item.img}" alt="${item.name}" class="w-full sm:w-28 h-28 object-cover rounded-xl">
+                    <div class="flex-1 space-y-1.5 flex flex-col justify-center">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-base font-medium text-charcoal-900">${item.name}</h3>
+                            <span class="font-serif text-sm font-normal text-softgold">฿${item.price}</span>
+                        </div>
+                        <p class="text-xs text-warmgray font-light leading-relaxed">${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        function filterMenu(cat, btn) {
+            document.querySelectorAll('.menu-tab-btn').forEach(b => { b.classList.remove('tab-btn-active'); b.classList.add('text-warmgray'); });
+            if(btn) { btn.classList.add('tab-btn-active'); btn.classList.remove('text-warmgray'); }
+            renderMenu(cat === 'all' ? menuItems : menuItems.filter(i => i.category === cat));
+        }
+        window.onload = () => renderMenu(menuItems);
+    </script>
+
+    <footer class="bg-cream-100 border-t border-cream-200/80 py-12">
+        <div class="max-w-6xl mx-auto px-6 text-center space-y-4">
+            <span class="font-serif text-2xl tracking-widest text-charcoal-900 block">M A I S O N</span>
+            <p class="text-xs text-warmgray font-light tracking-widest uppercase">Simple • Pure • Authentic</p>
+            <div class="flex justify-center space-x-6 text-xs text-warmgray pt-2">
+                <a href="index.html" class="hover:text-charcoal-900 transition">หน้าแรก</a>
+                <a href="menu.html" class="hover:text-charcoal-900 transition">เมนูอาหาร</a>
+                <a href="about.html" class="hover:text-charcoal-900 transition">เกี่ยวกับเรา</a>
+                <a href="reservation.html" class="hover:text-charcoal-900 transition">จองโต๊ะ</a>
+                <a href="contact.html" class="hover:text-charcoal-900 transition">ติดต่อเรา</a>
+            </div>
+            <p class="text-[11px] text-warmgray/80 font-light pt-4">&copy; 2026 MAISON Eatery. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
